@@ -37,6 +37,7 @@ pipeline {
         }
         stage('Unit tests') {
             steps {
+                sh 'npm install --ignore-scripts'
                 sh 'npm test -- --runInBand'
             }
         }

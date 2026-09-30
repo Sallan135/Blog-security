@@ -38,6 +38,7 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'npm install --ignore-scripts'
+                sh 'npm rebuild bcrypt'
                 sh 'npm test -- --runInBand'
             }
         }

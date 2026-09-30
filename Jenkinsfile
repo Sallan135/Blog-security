@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh 'git pull origin main'
+                echo 'Source code checked out by Jenkins'
             }
         }
         stage('Build') {

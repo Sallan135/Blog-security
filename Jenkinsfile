@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan .', odcInstallation: 'dependency-check'
+                dependencyCheck additionalArguments: '--scan . --noupdate', odcInstallation: 'dependency-check'
             }
         }
     }

@@ -25,7 +25,12 @@ pipeline {
         }
         stage('Nikto Scan') {
             steps {
-                sh 'nikto -h https://localhost:3000'
+                sh 'nikto -h http://localhost:3000'
+            }
+        }
+        stage('Dependency Check') {
+            steps {
+                dependencyCheck additionalArguments: '--scan .', odcInstallation: 'dependency-check'
             }
         }
     }

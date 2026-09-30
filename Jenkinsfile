@@ -23,5 +23,10 @@ pipeline {
                 sh 'trivy image blog:latest'
             }
         }
+        stage('Nikto Scan') {
+            steps {
+                sh 'nikto -h https://localhost:3000'
+            }
+        }
     }
 }

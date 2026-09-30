@@ -35,5 +35,10 @@ pipeline {
                 }
             }   
         }
+        stage('Unit tests') {
+            steps {
+                sh 'npm test -- --runInBand'
+            }
+        }
     }
 }

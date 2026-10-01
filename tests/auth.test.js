@@ -1,14 +1,18 @@
+let registeredPassword;
+
 jest.mock('../database', () => ({
     get: jest.fn((query, params, callback) => {
         callback(null, null);
     }),
     run: jest.fn((query, params, callback) => {
-        callback(null);
+         registeredPassword = params[1];
+         callback(null);
     })
 }));
 
 const request = require('supertest');
 const app = require('../app');
+const db = require('../database');
 
 describe('Authentication routes', () => {
     test('GET /auth/login should return status 200', async () => {
@@ -36,4 +40,17 @@ test('GET /auth/login should contain login page', async () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.text).toContain('Login');
+});
+
+test('POST /auth/register should not store password in plain text', async () => {
+    await request(app)
+    .post('/auth/register')
+    .type('form')
+    .send({
+        username: 'testuser',
+        password: 'secret123'
+    });
+
+    expect(registeredPassword).toEqual(expect.any(String));
+    expect(registeredPassword).not.toBe('secret123');
 });

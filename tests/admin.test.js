@@ -5,7 +5,9 @@ jest.mock('../database', () => ({
         });
     }),
     run: jest.fn(),
-    all: jest.fn()
+    all: jest.fn((query, callback) => {
+        callback(null, []);
+    })
 }));
 
 const request = require('supertest');
